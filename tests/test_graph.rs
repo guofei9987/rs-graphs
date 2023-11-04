@@ -90,16 +90,16 @@ fn test2() {
             dst_name, dst_name.to_string());
     }
 
-    let idxes = vec![2];
-    let level_order = graph.get_downstream(idxes, 100000000);
-    for level in 0..level_order.len() {
-        println!("[level = {}], idx = {:?}", level, level_order.get(&level));
+    // 寻找节点 2 和节点 3 的全部下游
+    let downstream = graph.get_downstream(vec![2, 3], 100000000);
+    for level in 0..downstream.len() {
+        println!("[level = {}], idx = {:?}", level, downstream.get(&level));
     }
 
     println!("=====print names=====");
-    for level in 0..level_order.len() {
+    for level in 0..downstream.len() {
         let node_names: Vec<&String> =
-            level_order.get(&level).unwrap()
+            downstream.get(&level).unwrap()
                 .iter().map(|idx| graph.get_name_by_idx(*idx))
                 .collect();
         println!("[level = {}], names = {:?}", level, node_names);

@@ -38,9 +38,26 @@ let mut graph = Graph::new(&mut arena_list);
   - 保存 `graph.save(filename)`
   - 加载 `graph.load(filename)`
 
-## 进阶功能
+## 图算法
 
-- 遍历全部下游
-- 寻找最近链路
+
+获取全部下游
+
+```Rust
+// 寻找节点 2 和节点 3 的全部下游
+let downstream = graph.get_downstream(vec![2, 3], 100000000);
+for level in 0..downstream.len() {
+    println!("[level = {}], idx = {:?}", level, downstream.get(&level));
+}
+```
+
+
+
+寻找最近链路两个节点之间的最短长度
+
+```Rust
+println!("2 到 7 的最短路径长度为： {}", graph.get_shortest(2, 7, 1000000).unwrap());
+```
+
 - [ ] 寻找关键链接
 
