@@ -40,5 +40,10 @@ fn test1() {
     let filename="save.db";
     graph.save(filename);
 
+    // graph.clear();
+    graph.load(filename);
+
+    graph.print_edges();
+
 
 }

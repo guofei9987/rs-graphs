@@ -184,6 +184,12 @@ impl<'a, T> Graph<'a, T> {
         self.owner.get_idx_by_name(name)
     }
 
+    pub fn get_all_data(&self) -> Vec<&T> {
+        return self.owner.nodes.iter()
+            .map(|x| &x.data)
+            .collect::<Vec<&T>>();
+    }
+
     pub fn get_all_node_names(&self) -> Vec<&String> {
         return self.owner.nodes.iter()
             .map(|x| &x.name)
