@@ -41,8 +41,13 @@ fn test1() {
     // 持久化
     graph.save(filename);
 
-    // 加载
-    graph.load(filename);
+    // To display, create a new one
+    let mut arena_list2 = ArenaList::new();
+    let mut graph2: Graph<String> = Graph::new(&mut arena_list2);
 
-    graph.print_edges();
+    // 加载
+    graph2.load(filename);
+
+    graph2.print_nodes();
+
 }

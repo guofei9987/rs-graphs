@@ -46,12 +46,8 @@ impl<'a, T: Serialize + DeserializeOwned + Clone+Debug> Graph<'a, T> {
         let all_node_names = save_obj.all_node_names.clone();
         let all_edge = save_obj.all_edges.clone();
         let mut all_data = save_obj.all_data.clone();
-        println!("{:?}",all_node_names);
-        println!("{:?}",all_edge);
-        println!("{:?}",all_data);
 
-
-        for idx in (0..all_node_names.len()).rev() {
+        for idx in 0..all_node_names.len() {
             self.add_node(all_node_names[idx].clone().as_str(), all_data[idx].clone());
         }
 

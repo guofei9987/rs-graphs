@@ -3,6 +3,13 @@ Graph algorithms in Rust
 
 Rust 实现图数据库
 
+```toml
+[dependencies]
+rs-graphs = "*"
+```
+
+
+
 初始化一个链表
 ```rust
 use rs_graphs::graph::{Node, ArenaList, Graph};
@@ -28,8 +35,8 @@ let mut graph = Graph::new(&mut arena_list);
 - 改
     - 改节点对应的值：`graph.add_node(name: &str, data: T) -> usize` 如果不存在，则创建节点。如果存在则修改其值。
 - 持久化。目前只支持 `T` 为字符串的情况
-  - [ ] 保存
-  - [ ] 加载
+  - 保存 `graph.save(filename)`
+  - 加载 `graph.load(filename)`
 
 ## 进阶功能
 
