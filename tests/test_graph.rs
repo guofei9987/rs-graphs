@@ -90,18 +90,17 @@ fn test2() {
             dst_name, dst_name.to_string());
     }
 
-    // 寻找节点 2 和节点 3 的全部下游
-    let downstream = graph.get_downstream(vec![2, 3], 100000000);
-    for level in 0..downstream.len() {
-        println!("[level = {}], idx = {:?}", level, downstream.get(&level));
+    println!("=====Downstream of Nodes=====");
+    // 寻找节点 2, 3, 5 的全部下游
+    let downstream = graph.get_downstream(vec![2, 3, 5], 100000000);
+    for (level, node_idx) in downstream.iter().enumerate() {
+        println!("[level = {}], idx = {:?}", level, node_idx);
     }
 
     println!("=====print names=====");
-    for level in 0..downstream.len() {
-        let node_names: Vec<&String> =
-            downstream.get(&level).unwrap()
-                .iter().map(|idx| graph.get_name_by_idx(*idx))
-                .collect();
+    for (level, node_idx) in downstream.iter().enumerate() {
+        let node_names: Vec<&String> = node_idx.iter()
+            .map(|idx| graph.get_name_by_idx(*idx)).collect();
         println!("[level = {}], names = {:?}", level, node_names);
     }
 

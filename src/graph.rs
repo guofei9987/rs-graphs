@@ -246,19 +246,19 @@ impl<'a, T> Graph<'a, T> {
 }
 
 impl<'a, T> Graph<'a, T> {
-    // 找到某个节点的全部下游节点。返回的数据结构是 {level: [idx1, idx2, ...]} 的 HashMap，存放的是下游层数、节点号
-    pub fn get_downstream(&self, batch_idx: Vec<usize>, max_level: usize) -> HashMap<usize, Vec<usize>> {
-        let mut res: HashMap<usize, Vec<usize>> = HashMap::new();
+    // 找到某个节点的全部下游节点。返回的数据结构是 {[idx1, idx2, ...],[idx3, idx4, ...], ...} 存放的是下游每层的节点号
+    pub fn get_downstream(&self, batch_idx: Vec<usize>, max_level: usize) -> Vec<Vec<usize>> {
+        let mut res: Vec<Vec<usize>> = Vec::new();
         let mut q: Vec<usize> = batch_idx.clone();
         let mut searched = HashSet::new(); // 存放已经被遍历到的节点。用来排除掉环状节点
         let mut level = 0;
         while !q.is_empty() && level < max_level {
-            res.insert(level, q.clone());
+            res.push(q.clone());
             searched.extend(q.clone());
             q = q.iter().flat_map(|&node_idx| {
                 self.owner.nodes[node_idx].next_idx.iter()
                     .filter(|&next_idx| !searched.contains(next_idx)).copied()
-            }).collect();
+            }).collect::<HashSet<usize>>().into_iter().collect();
             level += 1;
         }
         res
