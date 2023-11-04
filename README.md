@@ -46,8 +46,10 @@ let mut graph = Graph::new(&mut arena_list);
 ```Rust
 // 寻找节点 2 和节点 3 的全部下游
 let downstream = graph.get_downstream(vec![2, 3], 100000000);
-for level in 0..downstream.len() {
-    println!("[level = {}], idx = {:?}", level, downstream.get(&level));
+for (level, node_idx) in downstream.iter().enumerate() {
+  let node_names: Vec<&String> = node_idx.iter()
+  .map(|idx| graph.get_name_by_idx(*idx)).collect();
+  println!("[level = {}], names = {:?}", level, node_names);
 }
 ```
 
