@@ -26,7 +26,7 @@ fn test1() {
         , ("John", "Emma")
         , ("Tom", "Sophia")
         , ("Sophia", "John")
-        , ("中文", "John")
+        , ("中文", "John"),
     ]
         ;
 
@@ -37,13 +37,12 @@ fn test1() {
     }
 
 
-    let filename="save.db";
+    let filename = "save.db";
+    // 持久化
     graph.save(filename);
 
-    // graph.clear();
+    // 加载
     graph.load(filename);
 
     graph.print_edges();
-
-
 }

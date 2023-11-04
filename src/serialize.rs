@@ -4,6 +4,7 @@ use std::fs;
 use std::io::Write;
 use crate::graph::Graph;
 use serde::{Serialize, Deserialize};
+use serde::de::DeserializeOwned;
 // TODO:这个需要用户自己定义T的序列化方法
 
 #[derive(Serialize, Deserialize)]
@@ -13,7 +14,7 @@ struct SaveObj<T> {
     all_edges: Vec<(usize, usize)>,
 }
 
-impl<'a, T: Serialize + Deserialize<'a> + Clone+Debug> for Graph<'a, T> {
+impl<'a, T: Serialize + DeserializeOwned + Clone+Debug> Graph<'a, T> {
     // 保存
     pub fn save(&self, filename: &str) {
         let all_node_names = self.get_all_node_names()
