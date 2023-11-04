@@ -34,8 +34,11 @@ fn test1() {
             dst_name, dst_name.to_string());
     }
 
+    // 获取所有节点名
+    let all_node_names: Vec<&String> = graph.get_all_node_names();
     // 获取所有的边(返回值是节点的 index)
-    let edges = graph.get_all_edges();
+    let all_edges: Vec<(usize, usize)> = graph.get_all_edges();
+
 
     // 打印所有的边
     graph.print_edges();

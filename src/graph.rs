@@ -184,6 +184,11 @@ impl<'a, T> Graph<'a, T> {
         self.owner.get_idx_by_name(name)
     }
 
+    pub fn get_all_node_names(&self) -> Vec<&String> {
+        return self.owner.nodes.iter()
+            .map(|x| &x.name)
+            .collect::<Vec<&String>>();
+    }
 
     // 获取所有的边，其中的节点以 index 的形式给出
     pub fn get_all_edges(&self) -> Vec<(usize, usize)> {
@@ -198,7 +203,7 @@ impl<'a, T> Graph<'a, T> {
 
     // 打印所有节点的 name
     pub fn print_nodes(&self) {
-        println!("{:?}", self.owner.nodes.iter().map(|x| x.name.clone()).collect::<Vec<String>>());
+        println!("{:?}", self.get_all_node_names());
     }
     // 打印所有的边
     pub fn print_edges(&self) {
@@ -232,12 +237,6 @@ impl<'a, T> Graph<'a, T> {
     }
 
     pub fn clear(&mut self) { self.owner.clear() }
-
-    // 保存
-    pub fn save(&self) {}
-
-    // 加载
-    pub fn load(&mut self) {}
 }
 
 impl<'a, T> Graph<'a, T> {
