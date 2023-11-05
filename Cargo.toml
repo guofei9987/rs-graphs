@@ -3,7 +3,7 @@ name = "rs-graphs"
 version = "0.1.1"
 edition = "2021"
 authors = ["Guo Fei <me@guofei.site>"]
-description = "Graph algorithms in Rust"
+description = "Graph algorithms in Rust，图算法库/图数据库"
 license = "MIT"
 
 
